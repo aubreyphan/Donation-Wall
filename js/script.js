@@ -44,7 +44,20 @@ $(function(){
 
 	//alert transition
 	$('.grid .item').click(function(){
+		var audio = $('audio')[0];		
 		$('.alert-element').toggleClass('is-active');
+		
+		if($('.alert-element').hasClass('is-active')){
+			var audio = $('audio')[0];
+			audio.play();
+
+			setTimeout(function(){
+				var activeElement = $('.alert-element.is-active');
+				activeElement.removeClass('is-active');
+				audio.stop();
+			}, 4000);
+		};
+
 	});
-	
+
 });
