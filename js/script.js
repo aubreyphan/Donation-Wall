@@ -18,6 +18,7 @@ $(function(){
 	});
 
 	$('.item').each(function(i,j){
+
 		var animationList = ['bounceIn', 'fadeInDown', 'fadeInUp', 'flipInX', 'flipInY', 'rotateIn', 'slideInDown', 'zoomIn'];
 		var j=Math.floor(Math.random()*8);
 
