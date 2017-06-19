@@ -8,23 +8,21 @@ $(function(){
 
 	  setTimeout(function(){
 	    $('.odometer').html(2000000);
-	  }, 1000/2);
+	  }, 1000);
 
 	//grid of each contribution post
 	$('.grid').masonry({
 		itemSelector: '.item',
-		columnWidth: 200,
-		gutter: 10
+		columnWidth: 300,
+		gutter:-30
 	});
 
-	$('.item').each(function(i,j){
-
-		var animationList = ['bounceIn', 'fadeInDown', 'fadeInUp', 'flipInX', 'flipInY', 'rotateIn', 'slideInDown', 'zoomIn'];
-		var j=Math.floor(Math.random()*8);
-
+	$('.item').each(function(i){
+	
 		setTimeout(function(){
-			$('.item').eq(i).addClass('is-visible animated ' + animationList[j]);
-		}, 200*i);
+			$('.item').eq(i).load('contribution-post.html')
+			.addClass('is-visible animated bounceIn');			
+		}, 500*i);
 
 	});
 	

@@ -4,14 +4,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>Donation Wall</title>
 	
-	<link rel="stylesheet" type="text/css" href="css/stylesheet.css"></link>
+	<link rel="stylesheet" type="text/css" href="css/style.css"></link>
 	<link rel="stylesheet" type="text/css" href="css/animate.css"></link>
 
 	<!--Material-icons-->
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">	
 	<!--Odometer-->
-	<link rel="stylesheet" href="http://github.hubspot.com/odometer/themes/odometer-theme-train-station.css" />
+	<link rel="stylesheet" href="css/odometer-theme-train-station.css" />
 	<script src="http://github.hubspot.com/odometer/odometer.js"></script>
 	<!--jQuery-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -33,7 +33,7 @@
 		<div class="row">
 
 			<!-- Alert notification -->
-			<div class="col-md-5 col-lg-5 alert-element"> 
+			<div class="col-md-4 col-lg-4 alert-element"> 
 				<div class="icon"><i class="material-icons">star</i></div>
 				<div class="text"><span>We reach 100K !!!</span></div>
 			</div>
@@ -43,10 +43,13 @@
 				<source src="./bell.mp3" type="audio/mpeg">
 			</audio>
 			
+			<!-- Odometer -->
+			<div class="col-md-1 col-lg-1 text-center dollarSign">$</div>
 			<div class="col-md-7 col-lg-7 odometer">100000</div>
 		</div>
-
-		<div class="row grid">
+		
+		<!-- Contribution post -->
+		<div class="grid">
 			<div class="item">1</div>
 			<div class="item">2</div>
 			<div class="item">3</div>
@@ -58,6 +61,7 @@
 			<div class="item">9</div>
 		</div>
 
+		<!-- Footer -->
 		<footer>
 			Last updated at <span id="dateTime"></span>
 		</footer>
