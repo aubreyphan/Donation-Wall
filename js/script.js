@@ -42,8 +42,7 @@ $(function(){
 	};
 
 	//alert transition
-	$('.grid .item').click(function(){
-		var audio = $('audio')[0];		
+	$('.grid .item').click(function(){	
 		$('.alert-element').toggleClass('is-active');
 		
 		if($('.alert-element').hasClass('is-active')){
@@ -51,9 +50,9 @@ $(function(){
 			audio.play();
 
 			setTimeout(function(){
-				var activeElement = $('.alert-element.is-active');
-				activeElement.removeClass('is-active');
-				audio.stop();
+				$('.alert-element.is-active').removeClass('is-active');
+				audio.pause();
+				audio.currentTime=0;
 			}, 4000);
 		};
 
