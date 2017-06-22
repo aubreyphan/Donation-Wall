@@ -1,39 +1,48 @@
 body {
-  background: #D8D8D8 !important;
+  background: #d5e8da !important;
   padding: 20px;
   font-family: "Roboto Slab", serif;
   -webkit-font-smoothing: antialiased;
 }
 
 header {
-  background: linear-gradient(180deg, #00BCD4, #8FF0F8);
+  background: linear-gradient(180deg, #a2d89e, #576057);
   text-align: center;
   overflow: hidden;
-  box-shadow: 10px 10px 5pc;
+  box-shadow: 15px 20px rgba(87, 96, 87, 0.5);
 }
+  header .title {
+    padding: 3em 30px;
+    font-size: 30px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 3vw;
+  }
+  header .logo{
+    padding-top: 10px;
+  }
 
 footer{
-  background-color: #d7e3f7;
-  color: #000;
-  height: 5%;
+  background-color: #c5e0c5;
+  color: #4e564e;
+  height: 2em;
   text-align: center;
   font-size: 20px;
   padding-top: 10px;
+  margin: 0 -17px 0 -17px;
 }
 
-.title {
-  padding: 3em 30px;
-  font-size: 30px;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 3vw;
-}
-.logo{
-  padding-top: 10px;
-}
-.odometer{
-  font-size: 10em;
-}
+
+.odometer, .dollarSign {
+  font-size: 9em;
+  margin-top: 3%; }
+
+.dollarSign {
+  background-image: linear-gradient(to bottom, #b9ccc3 0%, #b9ccc3 35%, #75877d 55%, #b9ccc3 55%, #b9ccc3 100%);
+  background-color: #d1c6c7;
+  padding: 0;
+  color: #282d2b;
+  vertical-align: middle; }
 
 .main {
   margin: 0 auto;
@@ -41,64 +50,24 @@ footer{
   box-sizing: border-box;
 }
 
-/* Contribution post*/
-#contributionPost{
-  width: 100%;
-  height: 60px;
-  background: #000;
-  margin-bottom: 10px;
-  display: inline-block;
-  border-radius: 4px;
-  padding: 20px;
-  box-sizing: border-box;
-  overflow: auto;
-}
-#contributionPost #contributor{
-  display: inline-flex;
-}
-#contributionPost #contributor .avatar{
-  margin: 10px;
-}
-#contributionPost #contributor .contributorName{
-  margin: 10px;
-  font-size: 50px;
-  color: white;
-  padding-top: 20px;
-  padding-left: 10px;
-}
-#contributionPost #contributionBody{
-  border: 1px white solid;
-  margin: 20px;
-  text-align: center;
-}
-#contributionPost #contributionBody .contributed{
-  display: block;
-  font-size: 50px;
-}
-#contributionPost #contributionBody .contributionAmount{
-  display: block;
-  font-size: 100px;
-}
-
-
 .grid {
-  padding: 10px;
+  padding: 3pc 5% 3pc 5%;
   perspective: 1000px;
   column-count: 3;
 }
-
-.grid .item {
-  height: 60px;
+  .grid .item {
+  opacity: 0;
+  height: 400px;
   width: 100%;
-  width: 160px;
-  margin-bottom: 10px;
+  width: 500px;
+  margin: 0 20px 20px 0;
+  background-color: rgba(29, 66, 45, 0.9);
   display: inline-block;
   border-radius: 4px;
-  padding: 20px;
+  padding: 0;
   box-sizing: border-box;
-  color: white;
-}
-
+  overflow: auto;
+  }
 /*
 @for $i through 1 through 18 {
   &:nth-child(#{i}){
@@ -107,55 +76,38 @@ footer{
 };
  */ 
 
-.grid .item:nth-child(1) {
-  background-image: url(https://d13yacurqjgara.cloudfront.net/users/52758/screenshots/2922421/virgin_islands_national_park_dribbble_j_fletcher.jpg);
-}
-.grid .item:nth-child(2) {
-  background-image: url(https://d13yacurqjgara.cloudfront.net/users/40433/screenshots/2921609/untitled-4.png);
-}
-.grid .item:nth-child(3) {
-  background-image: url(https://d13yacurqjgara.cloudfront.net/users/34991/screenshots/2921840/dribbble_stickermule.png);
-}
-.grid .item:nth-child(4) {
-  background-image: url(https://d13yacurqjgara.cloudfront.net/users/40433/screenshots/2917699/untitled-1.png);
-}
-.grid .item:nth-child(5) {
-  background-image: url(https://d13yacurqjgara.cloudfront.net/users/34991/screenshots/2920459/dribbble_pill.png);
-}
-.grid .item:nth-child(6) {
-  background-image: url(https://d13yacurqjgara.cloudfront.net/users/40433/screenshots/2920159/untitled-1.png);
-}
-.grid .item:nth-child(7) {
-  background-image: url(https://d13yacurqjgara.cloudfront.net/users/52758/screenshots/2919566/st_john_usvi_fish.jpg);
-}
-.grid .item:nth-child(8) {
-  background-image: url(https://d13yacurqjgara.cloudfront.net/users/246575/screenshots/2919362/dribbble.jpg);
-}
-.grid .item:nth-child(9) {
-  background-image: url(https://d13yacurqjgara.cloudfront.net/users/299/screenshots/2917854/fizzy-shades.png);
-}
-
-.grid .item:nth-child(4n-5) {
-  height: 50px;
-}
-.grid .item:nth-child(2n) {
-  height: 300px;
-}
-.grid .item:nth-child(3n) {
-  height: 120px;
-}
-
 /*Animation*/
-.grid .item {
-  opacity: 0;
-}
-.grid .item.is-visible {
-  opacity: 1;
-  /*
-  -webkit-animation: Items 600ms ease-in forwards;
-          animation: Items 600ms ease-in forwards;
-  */
-}
+  .grid .item.is-visible {
+    opacity: 1;
+  }
+  .grid .item .contributor {
+        display: inline-flex; 
+      }
+        .grid .item .contributor .avatar {
+          margin: 10px; 
+        }
+        .grid .item .contributor .contributorName {
+          margin: 10px;
+          font-size: 50px;
+          color: #d4e2d3;
+          padding-top: 20px;
+          padding-left: 10px; 
+        }
+      .grid .item .contributionBody {
+        border: 1px white solid;
+        margin: 20px;
+        text-align: center;
+        color: #d4e2d3; 
+      }
+        .grid .item .contributionBody .contributed {
+          display: block;
+          font-size: 50px; 
+        }
+        .grid .item .contributionBody .contributionAmount {
+          display: block;
+          font-size: 100px;
+          color: #eefced; 
+        }
 
 /* Alert-section */
 .alert-element{
