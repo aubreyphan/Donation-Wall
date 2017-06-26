@@ -1,0 +1,24 @@
+{
+  "name": "donation-wall",
+  "version": "1.0.0",
+  "description": "donation wall",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.15.3",
+    "socket.io": "^2.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aubreyphan/donation-wall.git"
+  },
+  "author": "Aubrey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aubreyphan/donation-wall/issues"
+  },
+  "homepage": "https://github.com/aubreyphan/donation-wall#readme"
+}
