@@ -49,11 +49,11 @@ $(function(){
 			var audio = $('audio')[0];
 			audio.play();
 
-			setTimeout(function(){
-				$('.alert-element.is-active').removeClass('is-active');
-				audio.pause();
-				audio.currentTime=0;
-			}, 4000);
+			// setTimeout(function(){
+			// 	$('.alert-element.is-active').removeClass('is-active');
+			// 	audio.pause();
+			// 	audio.currentTime=0;
+			// }, 4000);
 		};
 
 	});
