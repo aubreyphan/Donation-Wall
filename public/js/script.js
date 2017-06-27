@@ -18,9 +18,9 @@ $(function(){
 	});
 
 	$('.item').each(function(i){
-	
+
 		setTimeout(function(){
-			$('.item').eq(i).load('contribution-post.html')
+			$('.item').eq(i).load('/media/contribution-post.html')
 			.addClass('is-visible animated bounceIn');			
 		}, 500*i);
 
@@ -49,11 +49,11 @@ $(function(){
 			var audio = $('audio')[0];
 			audio.play();
 
-			// setTimeout(function(){
-			// 	$('.alert-element.is-active').removeClass('is-active');
-			// 	audio.pause();
-			// 	audio.currentTime=0;
-			// }, 4000);
+			setTimeout(function(){
+				$('.alert-element.is-active').removeClass('is-active');
+				audio.pause();
+				audio.currentTime=0;
+			}, 4000);
 		};
 
 	});
