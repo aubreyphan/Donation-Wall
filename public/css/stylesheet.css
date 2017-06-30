@@ -32,12 +32,12 @@ footer{
   margin: 0 -17px 0 -17px;
 }
 
-.odometer, .dollarSign {
+.odometer, .dollar-sign {
   font-size: 7em;
   margin-top: 3%; 
   display: inline;}
 
-.dollarSign {
+.dollar-sign {
   background-image: linear-gradient(to bottom, #b9ccc3 0%, #b9ccc3 35%, #75877d 55%, #b9ccc3 55%, #b9ccc3 100%);
   background-color: #d1c6c7;
   padding: 0;
@@ -84,27 +84,27 @@ footer{
   .grid .item .contributor {
         display: inline-flex; 
       }
-        .grid .item .contributor .avatar {
+        .grid .item .contributor .contributor-avatar {
           margin: 10px; 
         }
-        .grid .item .contributor .contributorName {
+        .grid .item .contributor .contributor-name {
           margin: 10px;
           font-size: 50px;
           color: #d4e2d3;
           padding-top: 20px;
           padding-left: 10px; 
         }
-      .grid .item .contributionBody {
+      .grid .item .contribution-body {
         border: 1px white solid;
         margin: 20px;
         text-align: center;
         color: #d4e2d3; 
       }
-        .grid .item .contributionBody .contributed {
+        .grid .item .contribution-body .contributed {
           display: block;
           font-size: 50px; 
         }
-        .grid .item .contributionBody .contributionAmount {
+        .grid .item .contribution-body .contributor-amount {
           display: block;
           font-size: 100px;
           color: #eefced; 

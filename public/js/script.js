@@ -1,4 +1,6 @@
-$(function(){
+$(function() {
+
+	var template = $('#contribution-template').html();
 	
 	//odometer
 	window.odometerOptions={
@@ -17,15 +19,31 @@ $(function(){
 		gutter:-30
 	});
 
-	$('.item').each(function(i){
+		//ajax request
+	$.ajax({
+		type: 'GET',
+		cache: false,
+		dataType: 'json',
+		url: 'http://localhost:3000/api/contributions',
+		error: function(xhr, status) {
+			$('body').html('<p>Error fetching data</p>');
+		},
+		success: function(data) {
+			var delay = 500;
+			$.each(data.entries, function(index, entry) {
 
-		setTimeout(function(){
-			$('.item').eq(i).load('/media/contribution-post.html')
-			.addClass('is-visible animated bounceIn');			
-		}, 500*i);
+				var $item = $(template);
+				$item.find('.contributor-name').text(entry.name);
+				$item.find('.contributor-amount').append(entry.amount); 
 
+				setTimeout(function() {
+					$('#feed').append($item);
+					$item.addClass('is-visible animated bounceIn');
+				}, delay * index);
+			});	
+		}
 	});
-	
+
 	//display Date and Time at footer
 	var d = new Date();
 	var formatted_d = format_time(d);

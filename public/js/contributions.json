@@ -1,0 +1,19 @@
+w{
+	"entries": [
+		{
+			"avatar": null,
+			"name": "Ann Doe",
+			"amount": 100
+		},
+		{
+			"avatar": null,
+			"name": "Bill Doe",
+			"amount": 200
+		},
+		{
+			"avatar": null,
+			"name": "Cannon Doe",
+			"amount": 300
+		}
+	]
+}

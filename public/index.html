@@ -21,6 +21,7 @@
 </head>
 
 <body>
+
 	<div class="container-fluid main">	
 
 		<!--Header-->	
@@ -45,23 +46,14 @@
 			<!-- Odometer -->
 			<div class="col-md-8">
 				<div class="row">
-					<div class="col-md-1 col-lg-1 text-center dollarSign">$</div>
+					<div class="col-md-1 col-lg-1 text-center dollar-sign">$</div>
 					<div class="col-md-11 col-lg-11 odometer">100000</div>
 				</div>
 			</div>
 		</div>
 		
 		<!-- Contribution post -->
-		<div class="grid">
-			<div class="item">1</div>
-			<div class="item">2</div>
-			<div class="item">3</div>
-			<div class="item">4</div>
-			<div class="item">5</div>
-			<div class="item">6</div>
-			<div class="item">7</div>
-			<div class="item">8</div>
-			<div class="item">9</div>
+		<div id="feed" class="grid">
 		</div>
 
 		<!-- Footer -->
@@ -71,14 +63,25 @@
 
 	</div>
 
-	<script type="text/javascript" src="/js/script.js"></script>
-	<script type="text/javascript" src="/js/app.js"></script>
 	<script src="js/masonry.pkgd.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
-	<script>
-		var socket=io();
-	</script>
 
+	<!-- contributor template -->
+	<script id="contribution-template" type="text/template">
+		<div class="item">
+			<div class="contributor">
+				<img class="contributor-avatar" src="http://via.placeholder.com/100x100" alt="avatar" />
+				<span class="contributor-name"></span>
+			</div>
+
+			<div class="contribution-body">
+				<span class="contributed">Contribute</span>
+				<span class="contributor-amount">$</span>
+			</div>
+		</div>
+	</script>
+	
+	<script src="/js/script.js"></script>
 
 </body>
 </html>
