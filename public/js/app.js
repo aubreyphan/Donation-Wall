@@ -25,6 +25,16 @@ app.get('/api/contributions', function(req, res){
 	res.sendFile('contributions.json', {root: __dirname});
 });
 
+app.get('/push', function(req, res) {
+	res.send('ok');
+
+	io.emit('new contribution', {
+		avatar: "http://bobfamiliar.azurewebsites.net/wp-content/uploads/2013/05/microsoft-favicon-100x100.png",
+		name: "Eddie Doe",
+		amount: 700
+	});
+});	 
+
 io.on('connection', function(socket){
 	connections.push(socket);
 	console.log('Connected: %s sockets connected', connections.length);
