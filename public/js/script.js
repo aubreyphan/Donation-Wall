@@ -9,7 +9,17 @@ $(function() {
 	};
 
 	  setTimeout(function(){
-	    $('.odometer').html(2000000);
+	    	$.ajax({
+				type: 'GET',
+				dataType: 'json',
+				url: 'http://localhost:3000/api/campaign',
+				error: function(xhr, status){
+					$('header').html('<p>Error fetching total money raised</p>');
+				},
+				success: function(data){
+					$('.odometer').html(data.stats.total_raised);
+				}
+	    	});
 	  }, 1000);
 
 	//grid of each contribution post
@@ -19,7 +29,23 @@ $(function() {
 		gutter:-30
 	});
 
-		//ajax request
+	//ajax request to fetch campaign info
+	$.ajax({
+		type: 'GET',
+		dataType: 'json',
+		url: 'http://localhost:3000/api/campaign',
+		error: function(xhr, status){
+			$('header').html('<p>Error fetching campaign</p>');
+		},
+		success: function(data){
+			$('img.logo').attr('src', data.image_url);
+			$('.campaign-name').text(data.title);
+			$('.introduction').text(data.introduction);
+		}
+	});
+
+
+	//ajax request to fetch contributions
 	$.ajax({
 		type: 'GET',
 		cache: false,
@@ -41,8 +67,8 @@ $(function() {
 		var delay = 500;
 		var $item = $(template);
 
-		$item.find('.contributor-avatar').attr('src', info.avatar); 
-		$item.find('.contributor-name').text(info.name);
+		$item.find('.contributor-avatar').attr('src', info.owner.image_url); 
+		$item.find('.contributor-name').text(info.owner.name);
 		$item.find('.contributor-amount').append(info.amount);
 
 		setTimeout(function() {
@@ -80,7 +106,6 @@ $(function() {
 				audio.currentTime=0;
 			}, 4000);
 		};
-
 	});
 
 });
