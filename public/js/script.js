@@ -69,7 +69,11 @@ $(function() {
 
 		$item.find('.contributor-avatar').attr('src', info.owner.image_url); 
 		$item.find('.contributor-name').text(info.owner.name);
-		$item.find('.contributor-amount').append(info.amount);
+		$item.find('.contributor-amount').append(numberFormat(info.amount));
+
+		function numberFormat(num) {
+		    return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") //replace with comma
+		}
 
 		setTimeout(function() {
 			$('#feed').prepend($item);
