@@ -5,6 +5,7 @@ var io = require('socket.io')(http);
 var path = require('path');
 var jsonFile = require('jsonfile');
 var request = require('request');
+
 var appToken = "f0mhue12nbn8uw7728hxcautftuqis1";
 
 connections = [];
