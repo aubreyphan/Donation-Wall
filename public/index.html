@@ -23,7 +23,7 @@
 <body>
 	
 	<div class="container-fluid main">	
-		<p class="test"></p>
+
 		<!--Header-->	
 		<header class="row">
 			<img class="col-md-2 col-lg-2 col-md-offset-1 col-lg-offset-1 logo" src="" height="200" width="200" alt="logo" />
@@ -37,17 +37,10 @@
 		<audio preload="auto">
 			<source src="/media/bell.mp3" type="audio/mpeg">
 		</audio>
-
+		
+		<!-- Odometer -->
 		<div class="row">
-
-			<!-- Alert notification -->
-			<div class="col-md-4 alert-element"> 
-				<div class="icon"><i class="material-icons">star</i></div>
-				<div class="text"><span>We reach 100K !!!</span></div> 
-			</div>
-			
-			<!-- Odometer -->
-			<div class="col-md-8">
+			<div class="col-md-8 col-md-offset-4">
 				<div class="row">
 					<div class="col-md-1 col-lg-1 text-center dollar-sign">$</div>
 					<div class="col-md-11 col-lg-11 odometer">0</div>
@@ -55,18 +48,27 @@
 			</div>
 		</div>
 		
-		<!-- Contribution post -->
-		<div id="feed" class="grid">
+		<!-- Alert notification -->
+		<div class="col-md-10 col-md-offset-1 alert-element"> 
+			<div class="icon"><img src="media/star.png" alt=""></div>
+			<div class="text text-center">We reach 10K !!!</div> 
+		</div>
+
+		<div>
+			<!-- Contribution post -->
+			<div id="feed" class="grid"></div>
+
 		</div>
 
 		<!-- Footer -->
-		<footer>
-			Last updated at <span id="dateTime"></span>
+		<footer class="text-center">
+			Last updated: <span id="date-time"></span>
 		</footer>
 
 	</div>
 
 	<script src="js/masonry.pkgd.min.js"></script>
+	<script src="https://momentjs.com/downloads/moment.min.js"></script>
 
 	<!-- contributor template -->
 	<script id="contribution-template" type="text/template">
@@ -80,6 +82,8 @@
 				<span class="contributed">Contributed</span>
 				<span class="contributor-amount">$</span>
 			</div>
+
+			<div class="created-at text-center"> </div>
 		</div>
 	</script>
 	

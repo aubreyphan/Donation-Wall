@@ -8,20 +8,6 @@ $(function() {
 		theme: 'train-station',
 	};
 
-	  setTimeout(function(){
-	    	$.ajax({
-				type: 'GET',
-				dataType: 'json',
-				url: 'http://localhost:3000/api/campaign',
-				error: function(xhr, status){
-					$('header').html('<p>Error fetching total money raised</p>');
-				},
-				success: function(data){
-					$('.odometer').html(data.stats.total_raised);
-				}
-	    	});
-	  }, 1000);
-
 	//grid of each contribution post
 	$('#grid').masonry({
 		itemSelector: '.item',
@@ -41,6 +27,10 @@ $(function() {
 			$('img.logo').attr('src', data.image_url);
 			$('.campaign-name').text(data.title);
 			$('.introduction').text(data.introduction);
+
+			setTimeout(function(){
+				$('.odometer').html(data.stats.total_raised);
+			}, 1000);
 		}
 	});
 
@@ -64,36 +54,42 @@ $(function() {
 	});
 
 	function addItem(i,info){
-		var delay = 500;
+		var delay = 1000;
 		var $item = $(template);
 
 		$item.find('.contributor-avatar').attr('src', info.owner.image_url); 
 		$item.find('.contributor-name').text(info.owner.name);
-		$item.find('.contributor-amount').append(info.amount);
+		$item.find('.contributor-amount').append(numberFormat(info.amount));
+		$item.find('.created-at').append(moment(info.created*1000).fromNow());
+
+		function numberFormat(num) {
+		    return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") //replace with comma
+		};
 
 		setTimeout(function() {
 			$('#feed').prepend($item);
-			$item.addClass('is-visible animated bounceIn');
+			$item.addClass('is-visible animated flipInX');
 		}, delay*i);
 	};
 
 	//display Date and Time at footer
-	var d = new Date();
-	var formatted_d = format_time(d);
-	$('#dateTime').text(formatted_d);
+	$('#date-time').text(moment().calendar());
 
-	function format_time(t){
-		hours = format_2_digits(t.getHours());
-		minutes = format_2_digits(t.getMinutes());
-		return hours + ':' + minutes;
-	};
+	// var d = new Date();
+	// $('#date-time').text(format_time(d));
 
-	function format_2_digits(t){
-		return t < 10 ? '0'+t : t;
-	};
+	// function format_time(t){
+	// 	hours = format_2_digits(t.getHours());
+	// 	minutes = format_2_digits(t.getMinutes());
+	// 	return hours + ':' + minutes;
+	// };
+
+	// function format_2_digits(t){
+	// 	return t < 10 ? '0'+t : t;
+	// };
 
 	//alert transition
-	$('.grid .item').click(function(){	
+	$('header').click(function(){	
 		$('.alert-element').toggleClass('is-active');
 		
 		if($('.alert-element').hasClass('is-active')){
@@ -107,5 +103,5 @@ $(function() {
 			}, 4000);
 		};
 	});
-
+	
 });

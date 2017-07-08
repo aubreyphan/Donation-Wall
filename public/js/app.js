@@ -84,13 +84,4 @@ app.get('/push', function(req, res) {
 	});
 });	 
 
-io.on('connection', function(socket){
-	connections.push(socket);
-	console.log('Connected: %s sockets connected', connections.length);
-
-	socket.on('disconnect', function(data){
-		connections.splice(connections.indexOf(socket), 1);
-		console.log('Disconnected: %s sockets connected', connections.length);
-	});
-});
 

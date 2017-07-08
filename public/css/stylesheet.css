@@ -4,168 +4,149 @@ body {
   font-family: "Roboto Slab", serif;
   -webkit-font-smoothing: antialiased;
 }
-
-header {
-  background: linear-gradient(180deg, #a2d89e, #576057);
-  text-align: center;
-  overflow: hidden;
-  box-shadow: 15px 20px rgba(87, 96, 87, 0.5);
-}
-  header .campaign-name {
-    padding-top: 30px;
-    font-size: 50px;
-    color: #fff;
-    text-transform: uppercase;
-    display: block;
-  }
-  header .introduction{
-    font-size: 20px;
-    color: white;
-    display: block;
+  
+  .main {
+    margin: 0 auto;
+    box-shadow: 0px 25px 30px -20px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
   }
 
-
-footer{
-  background-color: #c5e0c5;
-  color: #4e564e;
-  height: 2em;
-  text-align: center;
-  font-size: 20px;
-  padding-top: 10px;
-  margin: 0 -17px 0 -17px;
-}
-
-.odometer, .dollar-sign {
-  font-size: 7em;
-  margin-top: 3%; 
-  display: inline;}
-
-.dollar-sign {
-  background-image: linear-gradient(to bottom, #b9ccc3 0%, #b9ccc3 35%, #75877d 55%, #b9ccc3 55%, #b9ccc3 100%);
-  background-color: #d1c6c7;
-  padding: 0;
-  color: #282d2b;
-  vertical-align: middle;
-  transform: translateY(5px); }
-
-.main {
-  margin: 0 auto;
-  box-shadow: 0px 25px 30px -20px rgba(0, 0, 0, 0.2);
-  box-sizing: border-box;
-}
-
-.grid {
-  padding: 3pc 5% 3pc 5%;
-  perspective: 1000px;
-  column-count: 3;
-}
-  .grid .item {
-  opacity: 0;
-  height: 100%;
-  height: 450px;
-  width: 100%;
-  width: 500px;
-  margin: 0 20px 20px 0;
-  background-color: rgba(29, 66, 45, 0.9);
-  display: inline-block;
-  border-radius: 10px;
-  padding: 0;
-  box-sizing: border-box;
-  overflow: auto;
-  }
-/*
-@for $i through 1 through 18 {
-  &:nth-child(#{i}){
-    background-image: url(http://www.fillmurray.com/130/#{300 + ($i *2)});
-  };
-};
- */ 
-
-/*Animation*/
-  .grid .item.is-visible {
-    opacity: 1;
-  }
-  .grid .item .contributor {
-        display: inline-flex; 
+    header {
+      background: linear-gradient(180deg, #a2d89e, #576057);
+      text-align: center;
+      overflow: hidden;
+      box-shadow: 15px 20px rgba(87, 96, 87, 0.5);
+    }
+      header .campaign-name {
+        padding-top: 30px;
+        font-size: 50px;
+        color: #fff;
+        text-transform: uppercase;
+        display: block;
       }
-        .grid .item .contributor .contributor-avatar {
-          margin: 10px; 
+      header .introduction{
+        font-size: 20px;
+        color: white;
+        display: block;
+      }
+
+    footer{
+      background-color: #c5e0c5;
+      color: #4e564e;
+      height: 2em;
+      font-size: 20px;
+      padding-top: 10px;
+      margin: 0 -17px 0 -17px;
+    }
+
+    .odometer, .dollar-sign {
+      font-size: 7em;
+      margin-top: 3%; 
+      display: inline;}
+
+    .dollar-sign {
+      background-image: linear-gradient(to bottom, #b9ccc3 0%, #b9ccc3 35%, #75877d 55%, #b9ccc3 55%, #b9ccc3 100%);
+      background-color: #d1c6c7;
+      padding: 0;
+      color: #282d2b;
+      vertical-align: middle;
+      transform: translateY(5px); 
+    }
+
+    .grid {
+      padding: 3pc 5% 3pc 5%;
+      perspective: 1000px;
+      column-count: 3;
+    }
+      .grid .item {
+        opacity: 0;
+        height: 100%;
+        height: 450px;
+        width: 100%;
+        width: 500px;
+        margin: 0 20px 20px 0;
+        background-color: rgba(29, 66, 45, 0.9);
+        display: inline-block;
+        border-radius: 10px;
+        padding: 0;
+        box-sizing: border-box;
+        overflow: auto;
+      }
+      /*Animation*/
+        .grid .item.is-visible {
+          opacity: 1;
         }
-        .grid .item .contributor .contributor-name {
-          margin: 10px;
-          font-size: 40px;
+        .grid .item .contributor {
+              display: inline-flex; 
+            }
+              .grid .item .contributor .contributor-avatar {
+                margin: 10px; 
+              }
+              .grid .item .contributor .contributor-name {
+                margin: 10px;
+                font-size: 40px;
+                color: #d4e2d3;
+                padding-left: 10px; 
+              }
+        .grid .item .contribution-body {
+          border: 1px white solid;
+          margin: 20px;
+          text-align: center;
+          color: #d4e2d3; 
+        }
+          .grid .item .contribution-body .contributed {
+            display: block;
+            font-size: 50px; 
+          }
+          .grid .item .contribution-body .contributor-amount {
+            display: block;
+            font-size: 100px;
+            color: #eefced; 
+          }
+        .grid .item .created-at{
+          display: block;
           color: #d4e2d3;
-          padding-left: 10px; 
-        }
-      .grid .item .contribution-body {
-        border: 1px white solid;
-        margin: 20px;
-        text-align: center;
-        color: #d4e2d3; 
-      }
-        .grid .item .contribution-body .contributed {
-          display: block;
-          font-size: 50px; 
-        }
-        .grid .item .contribution-body .contributor-amount {
-          display: block;
-          font-size: 100px;
-          color: #eefced; 
+          font-size: 20px;
         }
 
-/* Alert-section */
-.alert-element{
-  font-size: 3em;
-  position: absolute;
-  color: rgba(255,255,255,0.7);
-  border-radius: 4px;
-  margin-top: 5%;
-  font-weight: 400;
-  display: flex;
-  align-items: stretch;
-  padding-right: 20px;
-  perspective: 1000px;
-  opacity: 0;
-  transform-origin: top left;
-  transform: rotate(90deg) scale(0.5) translate(100px, -300px) rotateX(90deg);
-  transition: all 450ms cubic-bezier(0, 0.6, 0.35, 1.4);
-  }
+    /* Alert-section */
+    .alert-element{
+      font-size: 5em;
+      background-color: rgba(29, 66, 45, 0.3);
+      border-radius: 10px;
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      margin-top: 5vh;
+      padding-top: 15vh;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50vw;
+      height: 50vh;
+      transform-origin: top left;
+      transform:  scale(0.5) rotateX(180deg) rotateY(180deg);
+      transition: all 500ms cubic-bezier(0, 0.6, 0.35, 1.4);
+      
+      z-index: 1;
+    }
+      .alert-element .icon{
+        position: absolute;
+        left: 40%;
+      }        
+      .alert-element .text{
+        color: rgba(29, 66, 45, 1);
+        font-size: 100px;
+        opacity: 0;
+        transform: scale(0.2);
+        transition: all 1000ms ease-in-out 1000ms;
+      }        
 
-.alert-element .icon{
-  padding: 20px;
-  background: #0097A7;
-  color: white;
-  border-radius: 4px 0px 0px 4px;
-  overflow: hidden;
-}      
-
-.alert-element .icon i{
-  transform: scale(0.2) translateY(50px);
-  transition: all 400ms cubic-bezier(0, 0.6, 0.35, 1.4) 600ms;
-  opacity: 0;
-}     
-
-.alert-element .text{
-  background-color: rgba(0,0,0,1);
-  padding: 0 20px;
-  display: flex;
-  align-items: center;
-  border-radius: 0px 4px 4px 0px;
-  opacity: 0;
-  transform: rotateY(90deg);
-  transition: all 1000ms ease-in-out 1000ms;
-  transform-origin: center left;
-}        
-
-.alert-element.is-active{
-  opacity: 1;
-  transform: rotate(0deg) scale(1);
-}
-.alert-element.is-active .icon i{
-  transform: scale(1) translateY(0px);
-  opacity: 1;
-}      
-.alert-element.is-active .text{
-  transform: rotateY(0deg);
-  opacity: 1;
-}
+      .alert-element.is-active{
+        opacity: 1;
+        transform: scale(1) rotateX(0deg) rotateY(0deg);
+       }   
+        .alert-element.is-active .text{
+          transform: scale(1);
+          opacity: 1;
+        }
