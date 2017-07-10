@@ -9,7 +9,7 @@ $(function() {
 	};
 
 	//grid of each contribution post
-	$('#grid').masonry({
+	$('.feed').masonry({
 		itemSelector: '.item',
 		columnWidth: 300,
 		gutter:-30
@@ -59,16 +59,12 @@ $(function() {
 
 		$item.find('.contributor-avatar').attr('src', info.owner.image_url); 
 		$item.find('.contributor-name').text(info.owner.name);
+		$item.find('.contributor-amount').append(numberFormat(info.amount));
 		$item.find('.created-at').append(moment(info.created*1000).fromNow());
 
 		function numberFormat(num) {
 		    return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") //replace with comma
 		};
-
-		function numberFormat(num) {
-		    return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") //replace with comma
-		}
-
 
 		setTimeout(function() {
 			$('#feed').prepend($item);
@@ -99,11 +95,13 @@ $(function() {
 		if($('.alert-element').hasClass('is-active')){
 			var audio = $('audio')[0];
 			audio.play();
+			$('.grid').css('opacity', 0.5);
 
 			setTimeout(function(){
 				$('.alert-element.is-active').removeClass('is-active');
 				audio.pause();
 				audio.currentTime=0;
+				$('.grid').css('opacity', 1);
 			}, 4000);
 		};
 	});

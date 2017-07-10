@@ -9,7 +9,7 @@ var request = require('request');
 var appToken = "f0mhue12nbn8uw7728hxcautftuqis1";
 
 connections = [];
-var campaignName = 'NatureConservancy';
+campaignName = 'alfons-mucha';
 
 http.listen(3000, function(){
 	console.log('listening on *: 3000');
@@ -17,14 +17,14 @@ http.listen(3000, function(){
 
 app.use(express.static('public'));
 app.use('/js', express.static(__dirname));
-app.use('/css', express.static(path.join(__dirname, '../css')));
-app.use('/media', express.static(path.join(__dirname, '../media')));
+app.use('/media', express.static(path.join(__dirname, '../../media')));
+app.use('/css', express.static(path.join(__dirname, '../../public/css')));
 
 app.get('/', function(req, res){
 	if (req.query.campaign === campaignName) { 
-		res.sendFile('index.html', {root: path.join(__dirname, '../')});
+		res.sendFile('index.html', {root: path.join(__dirname, '../../public')});
 	} else {
-		res.send('No notification');
+		res.send('You are not subscribed to this campaign.');
 	}
 });
 
@@ -37,7 +37,7 @@ app.get('/api/campaign', function(req, res) {
 
 	//request setHeader
 	var options = {
-		url: 'https://api-staging.fundrazr.com/v1/campaigns/NatureConservancy',
+		url: 'https://api-staging.fundrazr.com/v1/campaigns/alfons-mucha',
 		headers: {
 			'Authorization' : 'Bearer ' + appToken
 		}
@@ -58,7 +58,7 @@ app.get('/api/contributions', function(req, res) {
 
 	//request setHeader
 	var options = {
-		url: 'https://api-staging.fundrazr.com/v1/campaigns/NatureConservancy/contributions',
+		url: 'https://api-staging.fundrazr.com/v1/campaigns/alfons-mucha/contributions',
 		headers: {
 			'Authorization' : 'Bearer ' + appToken
 		}
@@ -78,7 +78,7 @@ app.get('/api/contributions', function(req, res) {
 app.get('/push', function(req, res) {
 	res.send('ok');
 
-	io.to(campaignName).emit('new contribution', {
+	io.to().emit('new contribution', {
 		avatar: "http://bobfamiliar.azurewebsites.net/wp-content/uploads/2013/05/microsoft-favicon-100x100.png",
 		name: "Eddie Doe",
 		amount: 700

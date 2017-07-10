@@ -17,6 +17,10 @@ body {
       overflow: hidden;
       box-shadow: 15px 20px rgba(87, 96, 87, 0.5);
     }
+      header.logo{
+        width: 200px;
+        height: 200px;
+      }
       header .campaign-name {
         padding-top: 30px;
         font-size: 50px;
@@ -57,6 +61,8 @@ body {
       padding: 3pc 5% 3pc 5%;
       perspective: 1000px;
       column-count: 3;
+      position: relative;
+      transform: translateY(-10vh);
     }
       .grid .item {
         opacity: 0;
@@ -112,41 +118,39 @@ body {
     /* Alert-section */
     .alert-element{
       font-size: 5em;
-      background-color: rgba(29, 66, 45, 0.3);
+      background-color: rgba(0,0,0,1);
       border-radius: 10px;
       opacity: 0;
       display: flex;
       flex-direction: column;
       margin-top: 5vh;
-      padding-top: 15vh;
-      position: absolute;
       top: 0;
       left: 0;
-      width: 50vw;
-      height: 50vh;
-      transform-origin: top left;
+      width: 50%;
+      height: 10vh;
       transform:  scale(0.5) rotateX(180deg) rotateY(180deg);
       transition: all 500ms cubic-bezier(0, 0.6, 0.35, 1.4);
-      
-      z-index: 1;
+
     }
       .alert-element .icon{
         position: absolute;
         left: 40%;
       }        
       .alert-element .text{
-        color: rgba(29, 66, 45, 1);
-        font-size: 100px;
+        color: white;
+        font-size: 50px;
         opacity: 0;
-        transform: scale(0.2);
+        transform: scale(0);
         transition: all 1000ms ease-in-out 1000ms;
       }        
 
       .alert-element.is-active{
         opacity: 1;
         transform: scale(1) rotateX(0deg) rotateY(0deg);
+        z-index: 10;
        }   
         .alert-element.is-active .text{
           transform: scale(1);
           opacity: 1;
+
         }
