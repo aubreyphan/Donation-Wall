@@ -17,7 +17,7 @@ http.listen(3000, function(){
 
 app.use(express.static('public'));
 app.use('/js', express.static(__dirname));
-app.use('/media', express.static(path.join(__dirname, '../../media')));
+app.use('/media', express.static(path.join(__dirname, '../../public/media')));
 app.use('/css', express.static(path.join(__dirname, '../../public/css')));
 
 app.get('/', function(req, res){
@@ -78,11 +78,18 @@ app.get('/api/contributions', function(req, res) {
 app.get('/push', function(req, res) {
 	res.send('ok');
 
-	io.to().emit('new contribution', {
-		avatar: "http://bobfamiliar.azurewebsites.net/wp-content/uploads/2013/05/microsoft-favicon-100x100.png",
-		name: "Eddie Doe",
-		amount: 700
+	io.to(campaignName).emit('new contribution', {
+		owner: {
+			name: "Eddie Doe",
+			image_url: "http://bobfamiliar.azurewebsites.net/wp-content/uploads/2013/05/microsoft-favicon-100x100.png"
+		},
+		amount: 70,
+		created: new Date().getTime()/1000
 	});
-});	 
+});	
+
+io.on('connection', function(socket){
+	socket.join(campaignName);
+}); 
 
 

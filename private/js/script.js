@@ -2,20 +2,25 @@ $(function() {
 
 	var template = $('#contribution-template').html();
 	var socket = io();
+
+	var delay = 1000;
+
+	var totalRaised = 0;
+
 	//odometer
 	window.odometerOptions={
 		format: '(,ddd).dd',
 		theme: 'train-station',
 	};
 
-	//grid of each contribution post
+	//GRID OF EACH CONTRIBUTION POST
 	$('.feed').masonry({
 		itemSelector: '.item',
 		columnWidth: 300,
 		gutter:-30
 	});
 
-	//ajax request to fetch campaign info
+	////AJAX REQUEST TO FETCH CAMPAIGN INFO
 	$.ajax({
 		type: 'GET',
 		dataType: 'json',
@@ -23,19 +28,17 @@ $(function() {
 		error: function(xhr, status){
 			$('header').html('<p>Error fetching campaign</p>');
 		},
-		success: function(data){
+		success: function(data) {
+			totalRaised = data.stats.total_raised;
 			$('img.logo').attr('src', data.image_url);
 			$('.campaign-name').text(data.title);
 			$('.introduction').text(data.introduction);
-
-			setTimeout(function(){
-				$('.odometer').html(data.stats.total_raised);
-			}, 1000);
+			$('.odometer').html(totalRaised);
 		}
 	});
 
 
-	//ajax request to fetch contributions
+	//AJAX REQUEST TO FETCH CONTRIBUTIONS
 	$.ajax({
 		type: 'GET',
 		cache: false,
@@ -45,22 +48,26 @@ $(function() {
 			$('body').html('<p>Error fetching data</p>');
 		},
 		success: function(data) {
-			$.each(data.entries, addItem); 
+			$.each(data.entries, addItem); //$.each(objects, func(key,value))			
 		}
 	});	
 
 	socket.on('new contribution', function(data){
+
 		addItem(0, data);
+		totalRaised += data.amount;
+		$('.odometer').html(totalRaised);
+
+
 	});
 
-	function addItem(i,info){
-		var delay = 1000;
+	function addItem(i,info){ //function(key,value) of objects on $.each
 		var $item = $(template);
 
 		$item.find('.contributor-avatar').attr('src', info.owner.image_url); 
 		$item.find('.contributor-name').text(info.owner.name);
 		$item.find('.contributor-amount').append(numberFormat(info.amount));
-		$item.find('.created-at').append(moment(info.created*1000).fromNow());
+		$item.find('.created-at').append(moment(info.created*1000).fromNow()); //momentJs
 
 		function numberFormat(num) {
 		    return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") //replace with comma
@@ -105,5 +112,5 @@ $(function() {
 			}, 4000);
 		};
 	});
-	
-});
+
+}); //end
