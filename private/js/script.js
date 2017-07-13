@@ -6,18 +6,12 @@ $(function() {
 	var delay = 1000;
 
 	var totalRaised = 0;
-
-	//odometer
-	window.odometerOptions={
-		format: '(,ddd).dd',
-		theme: 'train-station',
-	};
-
+	var progressbar = $('#progress-bar');
+	var progresslabel = $('.progress-label');
+	
 	//GRID OF EACH CONTRIBUTION POST
-	$('.feed').masonry({
+	$('.item').masonry({
 		itemSelector: '.item',
-		columnWidth: 300,
-		gutter:-30
 	});
 
 	////AJAX REQUEST TO FETCH CAMPAIGN INFO
@@ -29,11 +23,20 @@ $(function() {
 			$('header').html('<p>Error fetching campaign</p>');
 		},
 		success: function(data) {
+
 			totalRaised = data.stats.total_raised;
+
 			$('img.logo').attr('src', data.image_url);
 			$('.campaign-name').text(data.title);
 			$('.introduction').text(data.introduction);
-			$('.odometer').html(totalRaised);
+		//	$('.odometer').html(totalRaised);
+
+			// Progress bar
+			progressbar.progressbar({
+				value: totalRaised,
+				max: totalRaised*10
+			});
+			progresslabel.text("Raised $" + progressbar.progressbar("value"));
 		}
 	});
 
@@ -56,8 +59,11 @@ $(function() {
 
 		addItem(0, data);
 		totalRaised += data.amount;
-		$('.odometer').html(totalRaised);
 
+		progressbar.progressbar("option", "value", totalRaised);
+		progresslabel.text("Raised $" + progressbar.progressbar("value"));
+
+		$('html, body').animate({scrollTop: 0}, 'fast');
 
 	});
 
@@ -98,6 +104,7 @@ $(function() {
 	//alert transition
 	$('header').click(function(){	
 		$('.alert-element').toggleClass('is-active');
+
 		
 		if($('.alert-element').hasClass('is-active')){
 			var audio = $('audio')[0];
