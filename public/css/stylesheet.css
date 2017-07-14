@@ -7,8 +7,6 @@ body {
   
   .main {
     margin: 0 auto;
-    box-shadow: 0px 25px 30px -20px rgba(0, 0, 0, 0.2);
-    box-sizing: border-box;
   }
 
     header {
@@ -17,11 +15,8 @@ body {
       overflow: hidden;
       box-shadow: 15px 20px rgba(87, 96, 87, 0.5);
       padding: 10px;
+      min-height: 20vh;
     }
-      header .logo{
-      postion: relative;
-      top: 50%;
-      }
       header .campaign-name {
         padding-top: 20px;
         font-size: 50px;
@@ -63,6 +58,28 @@ body {
         text-shadow: 1px 1px 0 #fff;
         transform: translateY(10px);
       }
+    
+    #loader{
+      width: 150px;
+      height: 150px;
+      margin: 0 auto;
+      border: 16px solid #f3f3f3;
+      border-top: 16px solid rgba(29, 66, 45, 0.9);
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      position: relative;
+      top: 5vh;
+      animation: spin 3s linear infinite;
+    }
+    @keyframes spin {
+      0%{
+        transform: rotate(0deg);
+      }
+      100%{
+        transform: rotate(360deg);
+      }
+    }
 
     .grid {
       min-height: 100vh;
@@ -71,8 +88,7 @@ body {
       .grid .item {
         opacity: 0;
         background-color: rgba(29, 66, 45, 0.9) ;
-        border-radius: 10px;
-        box-sizing: border-box;
+        border: 10px solid #d5e8da;
       }
       /*Animation*/
         .grid .item.is-visible {

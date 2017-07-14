@@ -11,7 +11,7 @@ $(function() {
 	
 	//GRID OF EACH CONTRIBUTION POST
 	$('.item').masonry({
-		itemSelector: '.item',
+		itemSelector: '.item'
 	});
 
 	////AJAX REQUEST TO FETCH CAMPAIGN INFO
@@ -29,17 +29,19 @@ $(function() {
 			$('img.logo').attr('src', data.image_url);
 			$('.campaign-name').text(data.title);
 			$('.introduction').text(data.introduction);
-		//	$('.odometer').html(totalRaised);
 
 			// Progress bar
 			progressbar.progressbar({
-				value: totalRaised,
-				max: totalRaised*10
+				value: Math.min(totalRaised/2000*100, 60),	
+				max: 2000
 			});
-			progresslabel.text("Raised $" + progressbar.progressbar("value"));
+			progresslabel.text("Raised $" + totalRaised);
 		}
 	});
 
+	function hideLoader(){
+		$('#loader').css("display", "none");
+	}
 
 	//AJAX REQUEST TO FETCH CONTRIBUTIONS
 	$.ajax({
@@ -51,6 +53,7 @@ $(function() {
 			$('body').html('<p>Error fetching data</p>');
 		},
 		success: function(data) {
+			hideLoader();
 			$.each(data.entries, addItem); //$.each(objects, func(key,value))			
 		}
 	});	
@@ -60,8 +63,8 @@ $(function() {
 		addItem(0, data);
 		totalRaised += data.amount;
 
-		progressbar.progressbar("option", "value", totalRaised);
-		progresslabel.text("Raised $" + progressbar.progressbar("value"));
+		progressbar.progressbar("option", "value", );
+		progresslabel.text("Raised $" + totalRaised);
 
 		$('html, body').animate({scrollTop: 0}, 'fast');
 
@@ -87,19 +90,6 @@ $(function() {
 
 	//display Date and Time at footer
 	$('#date-time').text(moment().calendar());
-
-	// var d = new Date();
-	// $('#date-time').text(format_time(d));
-
-	// function format_time(t){
-	// 	hours = format_2_digits(t.getHours());
-	// 	minutes = format_2_digits(t.getMinutes());
-	// 	return hours + ':' + minutes;
-	// };
-
-	// function format_2_digits(t){
-	// 	return t < 10 ? '0'+t : t;
-	// };
 
 	//alert transition
 	$('header').click(function(){	
