@@ -103,16 +103,16 @@ $(function() {
 
 	//alert transition
 	$('header').click(function(){	
-		$('.alert-element').toggleClass('is-active');
+		$('#alert-element').toggleClass('is-active');
 
 		
-		if($('.alert-element').hasClass('is-active')){
+		if($('#alert-element').hasClass('is-active')){
 			var audio = $('audio')[0];
 			audio.play();
 			$('.grid').css('opacity', 0.5);
 
 			setTimeout(function(){
-				$('.alert-element.is-active').removeClass('is-active');
+				$('#alert-element.is-active').removeClass('is-active');
 				audio.pause();
 				audio.currentTime=0;
 				$('.grid').css('opacity', 1);
