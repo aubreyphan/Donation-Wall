@@ -83,7 +83,7 @@ app.get('/push', function(req, res) {
 			name: "Eddie Doe",
 			image_url: "http://bobfamiliar.azurewebsites.net/wp-content/uploads/2013/05/microsoft-favicon-100x100.png"
 		},
-		amount: 70,
+		amount: 500,
 		created: new Date().getTime()/1000
 	});
 });	

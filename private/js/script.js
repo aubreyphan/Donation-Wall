@@ -4,8 +4,8 @@ $(function() {
 	var socket = io();
 
 	var delay = 1000;
-
 	var totalRaised = 0;
+	var goal = 0;
 	var progressbar = $('#progress-bar');
 	var progresslabel = $('.progress-label');
 	
@@ -25,17 +25,13 @@ $(function() {
 		success: function(data) {
 
 			totalRaised = data.stats.total_raised;
+			goal = data.goal;
 
 			$('img.logo').attr('src', data.image_url);
 			$('.campaign-name').text(data.title);
 			$('.introduction').text(data.introduction);
 
-			// Progress bar
-			progressbar.progressbar({
-				value: Math.min(totalRaised/2000*100, 60),	
-				max: 2000
-			});
-			progresslabel.text("Raised $" + totalRaised);
+			progressBar(totalRaised);
 		}
 	});
 
@@ -58,18 +54,31 @@ $(function() {
 		}
 	});	
 
+	var numberOfContributions = 1;
 	socket.on('new contribution', function(data){
-
+		
 		addItem(0, data);
 		totalRaised += data.amount;
 
-		progressbar.progressbar("option", "value", );
+		progressbar.progressbar("option", "value", progressBar(totalRaised));
 		progresslabel.text("Raised $" + totalRaised);
+		
+		$('#top-notification')
+			.html(numberOfContributions + " new contribution(s)")
+			.addClass('is-visible')
+			.click(function(){
+				$(this).removeClass('is-visible');
+				numberOfContributions = 1;
+				$('html, body').animate({scrollTop: 0}, 'fast');
+			});
 
-		$('html, body').animate({scrollTop: 0}, 'fast');
-
+		numberOfContributions++;	
 	});
 
+	//display Date and Time at footer
+	$('#date-time').text(moment().calendar());	
+
+	//add contribution posts
 	function addItem(i,info){ //function(key,value) of objects on $.each
 		var $item = $(template);
 
@@ -84,17 +93,32 @@ $(function() {
 
 		setTimeout(function() {
 			$('#feed').prepend($item);
-			$item.addClass('is-visible animated flipInX');
+			$item.addClass('is-visible animated zoomIn');
 		}, delay*i);
 	};
 
-	//display Date and Time at footer
-	$('#date-time').text(moment().calendar());
+	//Progress bar
+	function progressBar(tR){
+		var limit = tR;
+		var progressGoal = goal;
+		if (!goal) {
+			progressGoal = 2000;
+			limit = 0.7 * progressGoal;
+		}
+		var progressVal = Math.min(tR, limit);
+
+		// Progress bar
+		progressbar.progressbar({
+			value: progressVal,
+			max: progressGoal
+		});
+	
+		progresslabel.text("Raised $" + tR);
+	} 
 
 	//alert transition
-	$('header').click(function(){	
+	function alertNotification(){
 		$('#alert-element').toggleClass('is-active');
-
 		
 		if($('#alert-element').hasClass('is-active')){
 			var audio = $('audio')[0];
@@ -108,6 +132,6 @@ $(function() {
 				$('.grid').css('opacity', 1);
 			}, 4000);
 		};
-	});
-
+	};
+		
 }); //end
