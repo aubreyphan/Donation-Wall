@@ -4,18 +4,14 @@ body {
   font-family: "Roboto Slab", serif;
   -webkit-font-smoothing: antialiased;
 }
-  
-  .main {
-    margin: 0 auto;
-  }
 
     header {
       background: linear-gradient(180deg, #a2d89e, #576057);
       text-align: center;
       overflow: hidden;
-      box-shadow: 15px 20px rgba(87, 96, 87, 0.5);
       padding: 10px;
       min-height: 20vh;
+      border-radius: 5px;
     }
       header .campaign-name {
         padding-top: 20px;
@@ -36,7 +32,7 @@ body {
       height: 2em;
       font-size: 20px;
       padding-top: 10px;
-      margin: 0 -17px 0 -17px;
+      border-radius: 5px;
     }
 
     #top-notification{
@@ -62,7 +58,7 @@ body {
       font-weight: bold;
     }
     #progress-bar{
-      margin-top: 3%;
+      margin: 20px 0;
       height: 50px;
       position: relative;
     }
@@ -99,18 +95,15 @@ body {
 
     .grid {
       min-height: 100vh;
-      margin: 20px;
     }
-      .grid .item {
-        opacity: 0;
+      .grid .col-md-4 .item {
+        opacity: 1;
         background-color: rgba(29, 66, 45, 0.9);
-        margin-bottom: 10px;
-        border: 10px solid #d5e8da;
+        margin-bottom: 30px;
+        border-radius: 5px;
       }
       /*Animation*/
-        .grid .item.is-visible {
-          opacity: 1;
-        }
+
         .grid .item .contributor {
               display: inline-flex; 
             }
@@ -121,7 +114,7 @@ body {
               }
               .grid .item .contributor .contributor-name {
                 margin: 5px;
-                font-size: 35px;
+                font-size: 30px;
                 color: #d4e2d3;
                 padding-left: 8px; 
               }
@@ -161,12 +154,7 @@ body {
       width: 100%;
       transform:  scale(0.5) rotateX(180deg) rotateY(180deg);
       transition: all 500ms cubic-bezier(0, 0.6, 0.35, 1.4);
-
-    }
-      #alert-element .icon{
-        position: absolute;
-        left: 40%;
-      }        
+    }     
       #alert-element .text{
         color: white;
         font-size: 60px;
@@ -191,7 +179,7 @@ body {
     }
     .grid .item .contribution-body .contributed,
     .grid .item .contributor .contributor-name{
-      font-size: 30px;
+      font-size: 25px;
     }
     .grid .item .contributor .contributor-avatar {
       height: 80px;
