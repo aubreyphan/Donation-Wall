@@ -3,10 +3,6 @@ $(function() {
 	var template = $('#contribution-template').html();
 	var socket = io();
 
-	var delay = 1000;
-	var totalRaised = 0;
-	var goal = 0;
-	var n = 1;
 	var progressbar = $('#progress-bar');
 	var progresslabel = $('.progress-label');
 	
@@ -16,6 +12,8 @@ $(function() {
 	});
 
 	////AJAX REQUEST TO FETCH CAMPAIGN INFO
+	var totalRaised = 0;
+	var goal = 0;
 	$.ajax({
 		type: 'GET',
 		dataType: 'json',
@@ -55,7 +53,7 @@ $(function() {
 		}
 	});	
 
-	var numberOfContributions = 1;
+	var n, numberOfContributions = 1;
 	socket.on('new contribution', function(data){
 		
 		addItem(0, data);
@@ -68,25 +66,70 @@ $(function() {
 			alertNotification();
 			n++;
 		}
-		
-		$('#top-notification')
-			.html(numberOfContributions + " new contribution(s)")
-			.addClass('is-visible')
-			.click(function(){
-				$(this).removeClass('is-visible');
-				numberOfContributions = 1;
-				$('html, body').animate({scrollTop: 0}, 'fast');
-			});
+	
+		// $('#top-notification')
+		// 	.html(numberOfContributions + " new contribution(s)")
+		// 	.addClass('is-visible')
+		// 	.click(function(){
+		// 		$(this).removeClass('is-visible');
+		// 		numberOfContributions = 1;
+		// 		$('html, body').animate({scrollTop: 0}, 'fast');
+		// 	});
+		// numberOfContributions++;	
 
-		numberOfContributions++;	
+		//Boostrap Notify
+		$.notify({
+			//options
+			icon: 'glyphicon glyphicon-bullhorn',
+			title: numberOfContributions,
+			message: 'new contribution(s)',
+			url: '#feed',
+			target: '_self'
+		},{
+			element: 'body',
+			position: null, //allow to specify a custom position
+			type: 'success',
+			allow_dismiss: true,
+			newest_on_top: true,
+			showProgressbar: false,
+			placement: {
+				from: 'top',
+				align: 'center'
+			},
+			offset: 20,
+			spacing: 10,
+			z_index: 10,
+			url_target: '_self',
+			mouse_over: null, 
+			animate: {
+				enter: 'animated zoomInDown',
+				exit: 'animated zoomOutUp'
+			},
+			onClosed: function(){ numberOfContributions ++ },
+			icon_type: 'class',
+			template: 
+				'<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+					'<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
+					'<span data-notify="icon"></span> ' +
+					'<span data-notify="title">{1}</span> ' +
+					'<span data-notify="message">{2}</span>' +
+					'<div class="progress" data-notify="progressbar">' +
+						'<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+					'</div>' +
+					'<a href="{3}" target="{4}" data-notify="url"></a>' +
+				'</div>' 
+		});
+		notify.show();
 	});
 
 	//display Date and Time at footer
 	$('#date-time').text(moment().calendar());	
 
 	//add contribution posts
+
 	function addItem(i,info){ //function(key,value) of objects on $.each
 		var $item = $(template);
+		var delay = 1000;
 
 		$item.find('.contributor-avatar').attr('src', info.owner.image_url); 
 		$item.find('.contributor-name').text(info.owner.name);
