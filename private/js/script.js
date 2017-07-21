@@ -3,6 +3,13 @@ $(function() {
 	var template = $('#contribution-template').html();
 	var socket = io();
 
+	var totalRaised = 0;
+	var goal = 0;
+
+	var n = 1;
+	var numberOfContributions = 1;
+	var notify;
+
 	var progressbar = $('#progress-bar');
 	var progresslabel = $('.progress-label');
 	
@@ -12,8 +19,6 @@ $(function() {
 	});
 
 	////AJAX REQUEST TO FETCH CAMPAIGN INFO
-	var totalRaised = 0;
-	var goal = 0;
 	$.ajax({
 		type: 'GET',
 		dataType: 'json',
@@ -53,7 +58,6 @@ $(function() {
 		}
 	});	
 
-	var n, numberOfContributions = 1;
 	socket.on('new contribution', function(data){
 		
 		addItem(0, data);
@@ -62,65 +66,79 @@ $(function() {
 		progressbar.progressbar("option", "value", progressBar());
 		progresslabel.text("Raised $" + totalRaised);
 
-		if(totalRaised/(n*1000) > 1){
-			alertNotification();
+		//GOAL NOTIFICATION
+		if (totalRaised/(n*1000) > 1) {
+			$('#goal-notify').remove();
+			var reach = $.notify({
+				icon: 'glyphicon glyphicon-flag',
+				message: 'We reach $ ' + n*1000 + ' !',
+			},{
+				type: 'warning',
+				placement: {
+					align: 'center'
+				},
+				delay: 4000,
+				newest_on_top: true,
+				onShow: function(){
+					var audio = $('audio')[0];
+					audio.play();
+
+					setTimeout(function(){
+						audio.pause();
+						audio.currentTime=0;
+					}, 4000);				
+				},
+				template: 
+					'<div id="goal-notify" data-notify="container" class="col-xs-11 col-sm-11 alert alert-{0} text-center reach" role="alert">' +
+						'<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
+						'<span data-notify="icon"></span> ' +
+						'<span data-notify="title">{1}</span> ' +
+						'<span data-notify="message">{2}</span>' +
+						'<a href="{3}" target="{4}" data-notify="url"></a>' +
+					'</div>'
+			});
 			n++;
 		}
-	
-		// $('#top-notification')
-		// 	.html(numberOfContributions + " new contribution(s)")
-		// 	.addClass('is-visible')
-		// 	.click(function(){
-		// 		$(this).removeClass('is-visible');
-		// 		numberOfContributions = 1;
-		// 		$('html, body').animate({scrollTop: 0}, 'fast');
-		// 	});
-		// numberOfContributions++;	
 
-		//Boostrap Notify
-		$.notify({
+		$('.reach').on('click', function(){
+			reach.close();
+		})
+
+		//NEW CONTRIBUTION NOTIFICATION
+		var message = numberOfContributions + ' new contribution(s)'; 
+		$('#contribution-notify').remove();
+		var notify = $.notify({
 			//options
 			icon: 'glyphicon glyphicon-bullhorn',
-			title: numberOfContributions,
-			message: 'new contribution(s)',
-			url: '#feed',
-			target: '_self'
-		},{
-			element: 'body',
-			position: null, //allow to specify a custom position
+			message: message
+			},{
+			//settings
 			type: 'success',
-			allow_dismiss: true,
-			newest_on_top: true,
-			showProgressbar: false,
 			placement: {
-				from: 'top',
 				align: 'center'
 			},
-			offset: 20,
-			spacing: 10,
-			z_index: 10,
-			url_target: '_self',
-			mouse_over: null, 
-			animate: {
-				enter: 'animated zoomInDown',
-				exit: 'animated zoomOutUp'
+			delay: 10000,
+			newest_on_top: true,
+			onShown: function(){ 
+				numberOfContributions++; 
 			},
-			onClosed: function(){ numberOfContributions ++ },
-			icon_type: 'class',
 			template: 
-				'<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+				'<div id="contribution-notify" data-notify="container" class="col-xs-11 col-sm-11 alert alert-{0} text-center notify" role="alert">' +
 					'<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
 					'<span data-notify="icon"></span> ' +
 					'<span data-notify="title">{1}</span> ' +
 					'<span data-notify="message">{2}</span>' +
-					'<div class="progress" data-notify="progressbar">' +
-						'<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-					'</div>' +
 					'<a href="{3}" target="{4}" data-notify="url"></a>' +
 				'</div>' 
 		});
-		notify.show();
-	});
+
+		$('.notify').on('click', function(){
+			$('html, body').animate({scrollTop: 0}, 'fast');
+			notify.close();
+			numberOfContributions = 1;
+		});
+
+	}); 
 
 	//display Date and Time at footer
 	$('#date-time').text(moment().calendar());	
@@ -146,10 +164,8 @@ $(function() {
 		    return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") //replace with comma
 		};
 
-		setTimeout(function() {
-			$('#feed').prepend($item);
-			$item.addClass('animated zoomIn');
-		}, delay*i);
+		$('#feed').prepend($item);
+		$item.addClass('animated zoomIn');
 
 	};
 
@@ -172,24 +188,5 @@ $(function() {
 		progresslabel.text("Raised $" + totalRaised);
 	} 
 
-	//alert transition
-	function alertNotification(){
-		$('#alert-element')			
-			.toggleClass('is-active')
-			.find('.text').text('WE REACH $' + n*1000 + ' !');
-		
-		if($('#alert-element').hasClass('is-active')){
-			var audio = $('audio')[0];
-			audio.play();
-			$('.grid').css('opacity', 0.5);
-
-			setTimeout(function(){
-				$('#alert-element.is-active').removeClass('is-active');
-				audio.pause();
-				audio.currentTime=0;
-				$('.grid').css('opacity', 1);
-			}, 4000);
-		};
-	};
 		
 }); //end

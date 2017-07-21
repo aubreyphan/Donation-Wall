@@ -1,7 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Lemonada|Roboto+Condensed');
+
 body {
   background: #d5e8da !important;
   padding: 20px;
-  font-family: "Roboto Slab", serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -19,11 +20,13 @@ body {
         color: #000;
         text-transform: uppercase;
         display: block;
+        font-family: 'Lemonada', cursive;
       }
       header .introduction{
         font-size: 20px;
         color: white;
         display: block;
+        font-family: 'Roboto Condensed', sans-serif;
       }
 
     footer{
@@ -33,26 +36,11 @@ body {
       font-size: 20px;
       padding-top: 10px;
       border-radius: 5px;
+      font-family: 'Roboto Condensed', sans-serif;
     }
 
-    // #top-notification{
-    //   background-color: #2D712C;
-    //   color: black;
-    //   font-size: 40px;
-    //   height: 5%;
-    //   position: fixed;
-    //   z-index: 10;
-    //   width: 100%;
-    //   margin: -20; 
-    //   opacity: 0;
-    // }
-      // #top-notification.is-visible{
-      //   opacity: 1;
-      //   cursor: pointer;
-      // }
-
-    [data-notify=""] {
-      
+    [data-notify="icon"], [data-notify="message"] {
+      font-size: 30px;
     }
 
     .ui-progressbar .ui-widget-header{
@@ -105,9 +93,9 @@ body {
         background-color: rgba(29, 66, 45, 0.9);
         margin-bottom: 30px;
         border-radius: 5px;
+        padding: 10px;
       }
       /*Animation*/
-
         .grid .item .contributor {
               display: inline-flex; 
             }
@@ -121,12 +109,15 @@ body {
                 font-size: 30px;
                 color: #d4e2d3;
                 padding-left: 8px; 
+                font-family: 'Roboto Condensed', sans-serif;
+                font-weight: bold;
               }
         .grid .item .contribution-body {
           border: 1px white solid;
           margin: 5px;
           text-align: center;
-          color: #d4e2d3; 
+          color: #d4e2d3;
+          font-family: 'Roboto Condensed', sans-serif; 
         }
           .grid .item .contribution-body .contributed {
             display: block;
@@ -143,40 +134,6 @@ body {
           font-size: 20px;
         }
 
-    /* Alert-section */
-    #alert-element{
-      font-size: 5em;
-      background-color: #576057;
-      border-radius: 10px;
-      opacity: 0;
-      display: flex;
-      flex-direction: column;
-      margin-top: 5vh;
-      position: absolute;
-      top: 50vh;
-      height: 10vh;
-      width: 100%;
-      transform:  scale(0.5) rotateX(180deg) rotateY(180deg);
-      transition: all 500ms cubic-bezier(0, 0.6, 0.35, 1.4);
-    }     
-      #alert-element .text{
-        color: white;
-        font-size: 60px;
-        opacity: 0;
-        transform: scale(0);
-        transition: all 1000ms ease-in-out 1000ms;
-      }        
-
-      #alert-element.is-active{
-        opacity: 1;
-        transform: scale(1) rotateX(0deg) rotateY(0deg);
-        z-index: 10;
-       }   
-        #alert-element.is-active .text{
-          transform: scale(1);
-          opacity: 1;
-        }
-
   @media screen and (max-width: 500px){
     .grid .item .contribution-body .contributor-amount{
       font-size: 70px;
@@ -191,5 +148,8 @@ body {
     }
     #top-notification{
       font-size: 30px;
+    }
+    [data-notify="icon"], [data-notify="message"] {
+      font-size: 20px;
     }
   }
