@@ -139,7 +139,7 @@ $(function() {
 			contributionNotify.close();
 			numberOfContributions = 1;
 		});
-
+		$('#date-time').text(moment().calendar());
 	}); //end socket.on
 
 	//display Date and Time at footer
