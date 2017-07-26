@@ -68,7 +68,6 @@ $(function() {
 
 		//GOAL NOTIFICATION
 		m = Math.floor(totalRaised/1000);
-		console.log('n=' + n);
 
 		if (m>0 && n==m) {
 			$('#goal-notify').remove();
@@ -102,7 +101,6 @@ $(function() {
 			});
 		}
 		n = m+1;
-		console.log('n=' + n);
 
 		$('#goal-notify').on('click', function(){
 			goalNotify.close();
