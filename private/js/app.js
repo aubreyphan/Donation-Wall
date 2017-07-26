@@ -3,13 +3,12 @@ var express = require('express')
 	,	http = require('http').Server(app);
 var io = require('socket.io')(http);
 var path = require('path');
-var jsonFile = require('jsonfile');
 var request = require('request');
 
 var appToken = "f0mhue12nbn8uw7728hxcautftuqis1";
 
 connections = [];
-campaignName = 'alfons-mucha';
+campaignName = 'NatureConservancy';
 
 http.listen(3000, function(){
 	console.log('listening on *: 3000');
@@ -37,7 +36,7 @@ app.get('/api/campaign', function(req, res) {
 
 	//request setHeader
 	var options = {
-		url: 'https://api-staging.fundrazr.com/v1/campaigns/alfons-mucha',
+		url: 'https://api-staging.fundrazr.com/v1/campaigns/NatureConservancy',
 		headers: {
 			'Authorization' : 'Bearer ' + appToken
 		}
@@ -58,7 +57,7 @@ app.get('/api/contributions', function(req, res) {
 
 	//request setHeader
 	var options = {
-		url: 'https://api-staging.fundrazr.com/v1/campaigns/alfons-mucha/contributions',
+		url: 'https://api-staging.fundrazr.com/v1/campaigns/NatureConservancy/contributions',
 		headers: {
 			'Authorization' : 'Bearer ' + appToken
 		}
@@ -83,7 +82,7 @@ app.get('/push', function(req, res) {
 			name: "Eddie Doe",
 			image_url: "http://bobfamiliar.azurewebsites.net/wp-content/uploads/2013/05/microsoft-favicon-100x100.png"
 		},
-		amount: 500,
+		amount: 300,
 		created: new Date().getTime()/1000
 	});
 });	

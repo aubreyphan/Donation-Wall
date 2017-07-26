@@ -5,10 +5,10 @@ $(function() {
 
 	var totalRaised = 0;
 	var goal = 0;
+	var m = 0;
+	var n = m;
 
-	var n = 1;
 	var numberOfContributions = 1;
-	var notify;
 
 	var progressbar = $('#progress-bar');
 	var progresslabel = $('.progress-label');
@@ -58,20 +58,23 @@ $(function() {
 		}
 	});	
 
-	socket.on('new contribution', function(data){
-		
-		addItem(0, data);
+	socket.on('new contribution', function(data) {
+
+		setTimeout(addItem(0, data), 1000);
 		totalRaised += data.amount;
 
 		progressbar.progressbar("option", "value", progressBar());
 		progresslabel.text("Raised $" + totalRaised);
 
 		//GOAL NOTIFICATION
-		if (totalRaised/(n*1000) > 1) {
+		m = Math.floor(totalRaised/1000);
+		console.log('n=' + n);
+
+		if (m>0 && n==m) {
 			$('#goal-notify').remove();
-			var reach = $.notify({
+			var goalNotify = $.notify({
 				icon: 'glyphicon glyphicon-flag',
-				message: 'We reach $ ' + n*1000 + ' !',
+				message: 'We reach $ ' + m + ',000 !',
 			},{
 				type: 'warning',
 				placement: {
@@ -89,7 +92,7 @@ $(function() {
 					}, 4000);				
 				},
 				template: 
-					'<div id="goal-notify" data-notify="container" class="col-xs-11 col-sm-11 alert alert-{0} text-center reach" role="alert">' +
+					'<div id="goal-notify" data-notify="container" class="col-xs-11 col-sm-11 alert alert-{0} text-center" role="alert">' +
 						'<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
 						'<span data-notify="icon"></span> ' +
 						'<span data-notify="title">{1}</span> ' +
@@ -97,17 +100,18 @@ $(function() {
 						'<a href="{3}" target="{4}" data-notify="url"></a>' +
 					'</div>'
 			});
-			n++;
 		}
+		n = m+1;
+		console.log('n=' + n);
 
-		$('.reach').on('click', function(){
-			reach.close();
+		$('#goal-notify').on('click', function(){
+			goalNotify.close();
 		})
 
 		//NEW CONTRIBUTION NOTIFICATION
 		var message = numberOfContributions + ' new contribution(s)'; 
 		$('#contribution-notify').remove();
-		var notify = $.notify({
+		var contributionNotify = $.notify({
 			//options
 			icon: 'glyphicon glyphicon-bullhorn',
 			message: message
@@ -123,7 +127,7 @@ $(function() {
 				numberOfContributions++; 
 			},
 			template: 
-				'<div id="contribution-notify" data-notify="container" class="col-xs-11 col-sm-11 alert alert-{0} text-center notify" role="alert">' +
+				'<div id="contribution-notify" data-notify="container" class="col-xs-11 col-sm-11 alert alert-{0} text-center" role="alert">' +
 					'<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
 					'<span data-notify="icon"></span> ' +
 					'<span data-notify="title">{1}</span> ' +
@@ -132,13 +136,13 @@ $(function() {
 				'</div>' 
 		});
 
-		$('.notify').on('click', function(){
+		$('#contribution-notify').on('click', function(){
 			$('html, body').animate({scrollTop: 0}, 'fast');
-			notify.close();
+			contributionNotify.close();
 			numberOfContributions = 1;
 		});
 
-	}); 
+	}); //end socket.on
 
 	//display Date and Time at footer
 	$('#date-time').text(moment().calendar());	
@@ -147,7 +151,6 @@ $(function() {
 
 	function addItem(i,info){ //function(key,value) of objects on $.each
 		var $item = $(template);
-		var delay = 1000;
 
 		$item.find('.contributor-avatar').attr('src', info.owner.image_url); 
 		$item.find('.contributor-name').text(info.owner.name);
@@ -173,6 +176,7 @@ $(function() {
 	function progressBar(){
 		var limit = totalRaised;
 		var progressGoal = goal;
+
 		if (!goal) {
 			progressGoal = 2000;
 			limit = 0.7 * progressGoal;
